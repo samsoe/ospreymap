@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <meta charset="utf-8">
+  <title>RVRI Osprey Map</title>
+  <link rel="stylesheet" type="text/css"
+      href="http://fonts.googleapis.com/css?family=Roboto">
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+<body>
+
+  <div id="footer">
+    <div id="flash" class="info"></div>
+    <div>
+      <h1>Raptor View Osprey Data Interface</h1>
+      <p>In collaboration with
+        <a href="http://www.raptorview.org/">RaptorView Research Institute</a>, <a href="http://www.mpgranch.com/">MPG Ranch</a> and <a href="http://movebank.org/">Movebank</a>.
+      </p>
+      <a href="http://www.mpgranch.com/"><img id="mpg" src="img/mpg.png"></a>
+      <a href="http://www.raptorview.org/"><img id="raptorview" src="img/raptorview.png"></a>
+      <a href="http://movebank.org/"><img id="movebank" src="img/movebank.png"></a>
+    </div>
+  </div>
+
+  <div id="map-canvas"></div>
+
+  <a id="my-link" href="#my-panel"><img src="img/menu_icon.png"></a>
+  <div id="my-panel" class="panel">
+    <h1>Menu</h1>
+    <p><img id="panel-close" src="img/menu_icon_grey.png"></p>
+    <div id='menu-items'>
+      <ul>
+        <li class="show">Show Individuals</li>
+        <ul id="birds" style="display:none">
+          <li>Egbert<img class="zoom" src="img/glass.png"></li>
+          <li>Henrietta<img class="zoom" src="img/glass.png"></li>
+          <li>Olive<img class="zoom" src="img/glass.png"></li>
+          <li>Rapunzel<img class="zoom" src="img/glass.png"></li>
+          <li>Scooter<img class="zoom" src="img/glass.png"></li>
+        </ul>
+      </ul>
+      <hr>
+      <ul>
+        <li id="current" class="active">Current Location</li>
+        <li id="multi-day">30 Day Track</li>
+      </ul>
+      <hr>
+      <ul>
+        <li><a href="/">Reset Map</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/jquery.panelslider.min.js"></script>
+  <script>
+    $('#my-link').panelslider({clickClose: false});
+
+    $('#panel-close').click(function() {
+      $.panelslider.close();
+    });
+  </script>
+</body>
+</html>
