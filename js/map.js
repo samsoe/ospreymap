@@ -169,8 +169,8 @@ function createPolylines() {
             path: track,
             clickable: true,
             strokeColor: data.individuals[i].color,
-            strokeOpacity: 0.5,
-            strokeWeight: 3
+            strokeOpacity: 0.4,
+            strokeWeight: 2
         });
         
         google.maps.event.addListener(data.individuals[i].polyline, 'click', (function (
@@ -425,9 +425,19 @@ $('#multi-day').on("click", function() {
     $(this).toggleClass("active");
 });
 
+$('#10day').on("click", function() {
+    hideCurrent();
+    if(!$(this).hasClass('active')) {
+        $('#current').toggleClass("active");
+        movebankLoad(10, 3000);
+    }
+    $(this).toggleClass("active");
+});
+
 $('#birds li').click(function() {
     var i = $(this).index();
-    map.setCenter(new google.maps.LatLng(data.individuals[i].locations[0]['location_lat'], data.individuals[i].locations[0]['location_long']))
+    var most_recent = data.individuals[i].locations.length - 1;
+    map.setCenter(new google.maps.LatLng(data.individuals[i].locations[most_recent]['location_lat'], data.individuals[i].locations[most_recent]['location_long']))
     markerClick(i);
 });
 
@@ -436,8 +446,7 @@ $('#birds li').on('mouseover', function() {
 });
 
 $('.zoom').click(function() {
-    /* setbounds */
-    console.log('zoom clicked');
+    map.setZoom(13);
 });
 
 $('.zoom').on('mouseover', function() {
