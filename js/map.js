@@ -12,9 +12,9 @@ var data;
 
 var jsonUrl = "http://www.movebank.org/movebank/service/public/json";
 var study_id = 14151082;
-var individual_local_identifiers = [117181, 117185, 117186, 130829, 130830];
-var individual_local_names = ["Egbert", "Henrietta", "Olive", "Rapunzel", "Scooter"];
-var colors = ["purple", "yellow", "blue", "orange", "red"];
+var individual_local_identifiers = [130828, 117181, 117185, 117186, 130829, 130830];
+var individual_local_names = ["130828", "Egbert", "Henrietta", "Olive", "Rapunzel", "Scooter"];
+var colors = ["pink", "purple", "yellow", "blue", "orange", "red"];
 
 var days = 3;
 var now = new Date();
