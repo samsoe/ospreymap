@@ -14,15 +14,15 @@ var jsonUrl = "http://www.movebank.org/movebank/service/public/json";
 var study_id = 14151082;
 var individual_local_identifiers = [130828, 117181, 117185, 117186, 130829, 130830];
 var individual_local_names = ["130828", "Egbert", "Henrietta", "Olive", "Rapunzel", "Scooter"];
-var colors = ["pink", "purple", "yellow", "blue", "orange", "red"];
+var colors = ["green", "purple", "yellow", "blue", "orange", "red"];
 
-var days = 3;
+var days = 1;
 var now = new Date();
-var timestamp_end = now.setDate(now.getDate() - 3);
+var timestamp_end = now.setDate(now.getDate() - 1);
 var timestamp_start = now.setDate(now.getDate() - days);
 
 var max_events_per_individual = 1;
-var loaded = false;
+var loaded30 = false;
 
 $(document).ready(function($) {
 	var mapOptions = {
@@ -191,6 +191,8 @@ function showCurrent() {
         data.individuals[i].marker.setVisible(true);
         data.individuals[i].polyline.setMap(map);
     }
+
+    $('#multi-day img').css("display", "none");
 }
 
 function showClosestPointInTime(individual, t) {
@@ -233,7 +235,7 @@ function showClosestPointInTime(individual, t) {
     individual.marker.timestamp = t;
     if (individual.marker.getMap() == null)
         individual.marker.setMap(map);
-    gracePeriod = 1000 * 60 * 60 * 24 * 2;
+    gracePeriod = 1000 * 60 * 60 * 24 * 10;
     if (t + gracePeriod < individual.locations[0].timestamp || t - gracePeriod > individual.locations[individual.locations.length - 1].timestamp)
         individual.marker.setMap(null);
 }
@@ -401,10 +403,14 @@ function markerClick(id) {
 }
 
 $('#current').on('click', function() {
-    if($('#current').hasClass('active')) {
+    $('#multi-day').removeClass('active');
+    if($(this).hasClass('active')) {
         hideCurrent();
     } else {
-        showCurrent();
+        for (i = 0; i < data.individuals.length; i++) {
+            data.individuals[i].marker.setVisible(true);
+            data.individuals[i].polyline.setMap(null);
+        }
         setBounds();
     }
     $(this).toggleClass("active");
@@ -418,11 +424,23 @@ $('.show').on("click", function() {
 
 $('#multi-day').on("click", function() {
     hideCurrent();
-    if(!$(this).hasClass('active')) {
-        $('#current').toggleClass("active");
-        movebankLoad(30, 3000);
+    $('#current').removeClass('active');
+    $(this).find('img').css("display", "inline", "cursor", "pointer");
+    if(!loaded30) {
+        if(!$(this).hasClass('active')) {
+            movebankLoad(30, 3000);
+            loaded30 = true;
+        }
+    } else {
+        showCurrent();
     }
-    $(this).toggleClass("active");
+
+    if($(this).hasClass("active")) {
+        $(this).removeClass("active");
+        hideCurrent();
+    } else {
+        $(this).addClass("active");
+    }
 });
 
 $('#10day').on("click", function() {
@@ -449,8 +467,8 @@ $('.zoom').click(function() {
     map.setZoom(13);
 });
 
-$('.zoom').on('mouseover', function() {
-    
+$('#viewall').click(function() {
+    setBounds();
 });
 
 $('#locations').on("click", function(){

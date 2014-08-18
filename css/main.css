@@ -154,3 +154,15 @@ li:hover {
   display: none;
   cursor: pointer;
 }
+
+#viewall {
+  color: #33b5e5;
+}
+
+#viewall:hover {
+  color: white;
+}
+
+#reset a:hover {
+  color: white;
+}
