@@ -166,3 +166,17 @@ li:hover {
 #reset a:hover {
   color: white;
 }
+
+#marker {
+  width:101px;
+  height:60px;
+}
+
+.individual {
+  color: #33b5e5;
+}
+
+.individual:hover {
+  background-color: grey;
+  color: white;
+}

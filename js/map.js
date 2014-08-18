@@ -169,7 +169,7 @@ function createPolylines() {
             path: track,
             clickable: true,
             strokeColor: data.individuals[i].color,
-            strokeOpacity: 0.4,
+            strokeOpacity: 0.5,
             strokeWeight: 2
         });
         
@@ -268,8 +268,10 @@ function updateInfo(individual) {
             ts = tsFirst;
         if (ts > tsLast)
             ts = tsLast;
-        individual.info.setContent("<div style='width:101px;height:40px;'><b>" + individual.name + "</b>" + "<br>" + "Date: " + formatTimestamp(ts) + "</div>");
+        individual.info.setContent("<div id='marker'><b>" + individual.name + "</b>" + "<br>" + "Date: " + formatTimestamp(ts) + 
+            "</div>");
     }
+    console.log(individual);
 }
 
 function showClosestPointInSpace(individual, latLng, snapToPoint) {
@@ -399,7 +401,6 @@ function hideCurrent() {
 
 function markerClick(id) {
     google.maps.event.trigger(data.individuals[id].marker, 'click');
-
 }
 
 $('#current').on('click', function() {
